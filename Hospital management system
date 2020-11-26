@@ -1,0 +1,2567 @@
+#include<iostream>
+#include<fstream>
+#include<conio.h>
+using namespace std;
+class Time
+{
+   int hr,min,sec,day;
+   
+    public:
+    
+   Time(){day=0;hr=10; min=0; sec=0;}
+  void setTime(int h,int m,int s)
+   {
+      min=m;
+      hr=h;	
+   	sec=s;	
+   	min=min+sec/60;
+		sec=sec%60;
+		hr=hr+min/60;
+		day=day+hr/24;
+		if(hr>24)
+		{
+			hr=10;
+			min=0;
+			sec=0;
+		}
+	}
+ void showTime()
+ {
+ 	cout<<hr<<":"<<min<<":"<<sec<<endl;
+ }
+ int gethr()
+ {
+ 	return hr;
+ }
+ int getmin()
+ {
+ 	return min;
+ }
+ int getsec()
+ {
+    return sec;	
+ }
+	
+};
+class person
+{ 
+    public:
+	string name;
+	int age;
+	char gender;
+	string phoneNo;
+	string Addr;
+	string DOB;
+	virtual void fun()=0;
+
+	
+};
+class patient :public person
+{
+ string depSelected;
+ string bloodGroup;
+ string status;
+ string reportStatus;	
+  public:
+  Time time;
+  void admitted()
+  {
+  	status="admitted";
+  }
+  patient(){
+  	status="Not admitted";
+  	reportStatus="N/A";
+  	}
+  void writeReport()
+	{
+		cout<<"Enter report:"<<endl;
+	    getchar(); 
+	    getline(cin,reportStatus);
+	}
+ void fun()
+ {
+ 	cout<<"virtual function"<<endl;
+ }
+ 
+  	void patientDetails()
+	{
+		cout<<"Name:";
+		getchar();
+		getline(cin,name);
+		cout<<"Age:";
+		cin>>age;
+		do{
+		cout<<"Gender(m/f):";
+		cin>>gender;
+		}while(gender!='m'&&gender!='f');
+
+		do{
+	cout<<"Phone No. ";
+	cin>>phoneNo;
+	}while(phoneNo.length()!=10);
+	
+		do{
+	cout<<"Blood Group: ";
+	cin>>bloodGroup;
+}while((bloodGroup!="A+")&&(bloodGroup!="a+")&&(bloodGroup!="B+")&&(bloodGroup!="b+")&&(bloodGroup!="A-") &&(bloodGroup!="a-")&&(bloodGroup!="AB+")&&(bloodGroup!="ab+")&&(bloodGroup!="O+")&&(bloodGroup!="o+")&&(bloodGroup!="O-") &&(bloodGroup!="o-") &&(bloodGroup!="AB-")&&(bloodGroup!="ab-")&&(bloodGroup!="N/A"));
+	
+		cout<<"Address:";
+	    getchar(); 
+	    getline(cin,Addr);
+		cout<<"Department selected:";
+		cin>>depSelected;
+		cout<<"Date of birth:";
+		cin>>DOB;
+	}
+	string getName()
+	{
+		return name;
+	}
+	string getDep()
+	{
+		return depSelected;
+	}
+	string getAddr()
+	{
+		return Addr;
+	}
+	string getStatus()
+	{
+		return status;
+	}
+	void discharge()
+	{
+		status="discharged";
+	}
+	int getAge()
+	{
+		return age;
+	}
+	string getPhoneNo()
+	{
+		return phoneNo;
+	}
+	string getBloodGroup()
+	{
+		return bloodGroup;
+	}
+	char getGender()
+	{
+		return gender;
+	}
+		string getReportStatus()
+	{
+	
+		return reportStatus;
+	}
+	
+
+
+};
+class criticallyILLPatient:public person
+{
+string EmergencyDepAlloted;	
+string bloodGroup;
+string status;
+string reportStatus;
+public:
+
+void writeReport()
+	{
+		cout<<"Enter report:"<<endl;
+	    getchar(); 
+	    getline(cin,reportStatus);
+	}
+	void CPatientDetails()
+	{
+		cout<<"Name:";
+		getchar();
+		getline(cin,name);
+		cout<<"Age:";
+		cin>>age;
+		
+		do{
+		cout<<"Gender(m/f):";
+		cin>>gender;
+		}while(gender!='m'&&gender!='f');
+		
+				do{
+	cout<<"Phone No. ";
+	cin>>phoneNo;
+	}while(phoneNo.length()!=10);
+	
+		do{
+	cout<<"Blood Group: ";
+	cin>>bloodGroup;
+}while((bloodGroup!="A+")&&(bloodGroup!="a+")&&(bloodGroup!="B+")&&(bloodGroup!="b+")&&(bloodGroup!="A-") &&(bloodGroup!="a-")&&(bloodGroup!="AB+")&&(bloodGroup!="ab+")&&(bloodGroup!="O+")&&(bloodGroup!="o+")&&(bloodGroup!="O-") &&(bloodGroup!="o-") &&(bloodGroup!="AB-")&&(bloodGroup!="ab-")&&(bloodGroup!="N/A"));
+		cout<<"Address:";
+	    getchar(); 
+	    getline(cin,Addr);
+		cout<<"Emergency Department Alloted:";
+		cin>>EmergencyDepAlloted;
+		cout<<"Date of birth:";
+		cin>>DOB;
+	}
+
+criticallyILLPatient()
+{
+	status="admitted";
+	reportStatus="N/A";
+	}
+
+	void discharge()
+	{
+		status="discharged";
+	}
+		string getName()
+	{
+		return name;
+	}
+	string getDep()
+	{
+		return EmergencyDepAlloted;
+	}
+	string getAddr()
+	{
+		return Addr;
+	}
+	string getStatus()
+	{
+		return status;
+	}
+	
+		int getAge()
+	{
+		return age;
+	}
+	char getGender()
+	{
+		return gender;
+	}
+	string getPhoneNo()
+	{
+		return phoneNo;
+	}
+	string getBloodGroup()
+	{
+		return bloodGroup;
+	}
+	string getReportStatus()
+	{
+		
+		return reportStatus;
+	}
+
+
+void fun(){cout<<"virtual function"<<endl;}
+};
+
+
+class visitor:public person
+{
+	string patientToMeet;
+	string depOfPatient;
+	string addrOfPatient;
+	public:
+	void visitorDetail(string n,string addr,string dep)
+	{   patientToMeet=n;
+	     addrOfPatient=addr;
+	     depOfPatient=dep;
+		cout<<"Enter name:";
+		getchar();
+		getline(cin,name);
+		cout<<"Enter age:";
+		cin>>age;
+		do{
+		cout<<"Gender(m/f):";
+		cin>>gender;
+		}while(gender!='m'&&gender!='f');
+		do{
+		cout<<"phone no. of visitor:";
+		cin>>phoneNo;
+		}while(phoneNo.length()!=10);
+		
+		cout<<"Enter Your Address:";
+		getchar(); 
+	    getline(cin,Addr);
+		
+		
+	}
+	string getName()
+	{
+		return name;
+	}
+	string getAddr()
+	{
+		return Addr;
+		
+	}
+	string getPhoneNo()
+	{
+		return phoneNo;
+	}
+	string getPatientToMeet()
+	{
+		
+		return patientToMeet;
+		
+	}
+	int getAge()
+	{
+		return age;
+	}
+	void fun()
+	{
+ cout<<"virtual function overloaded"<<endl;
+	}
+};
+
+void searchPatient()
+{
+	int flag=1;
+ 	string n;
+string addr;
+string dep;
+ patient p;
+ visitor v;
+ 
+ ofstream d("visitor.dat",ios::binary|ios::app);
+  
+  
+ifstream r1("allergist.dat",ios::binary|ios::in);
+
+   ifstream r2("dentist.dat",ios::binary|ios::in);
+
+ifstream r3("dermatologist.dat",ios::binary|ios::in);
+
+ifstream r4("physiotherapy.dat",ios::binary|ios::in);
+ 
+ 
+ 
+ char choose;
+  cout<<"Name of patient:";
+  cin>>n;
+
+  cout<<"Address of patient:";
+  cin>>addr;
+  
+  cout<<"Department of patient:";
+  cin>>dep;
+if(dep=="allergist")
+{
+choose='a';		
+}
+
+else if(dep=="dentist")
+{
+choose='b';		
+}
+
+else if(dep=="dermatologist")
+{
+choose='c';		
+}
+
+else if(dep=="physiotherapy")
+{
+choose='d';		
+}
+else
+{  choose='f';
+	cout<<"No Department Found!!!"<<endl;
+cout<<endl<<endl;
+
+	
+}
+
+
+switch(choose)
+{
+case 'a':{
+while(r1.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+		flag=0;
+		cout<<"patient found "<<endl<<endl;
+		cout<<" Enter Details :- "<<endl;
+		v.visitorDetail(n,addr,dep);
+		d.write((char*)&v,sizeof(v));
+		
+	}
+
+	
+}
+     d.close();
+      r1.close();
+       break;
+             }
+       
+ case 'b':{
+ 	
+ 	while(r2.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{	flag=0;
+		cout<<"patient found "<<endl<<endl;
+		cout<<" Enter Details :- "<<endl;
+		v.visitorDetail(n,addr,dep);
+		d.write((char*)&v,sizeof(v));
+		
+	}
+		
+	
+}
+     d.close();
+      r2.close();
+       break;
+               
+                
+                  }
+                  
+case 'c':{
+	           
+ 	
+ 	while(r3.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+			flag=0;
+	cout<<"patient found "<<endl<<endl;
+		cout<<" Enter Details :- "<<endl;
+		v.visitorDetail(n,addr,dep);
+		d.write((char*)&v,sizeof(v));
+		
+	}
+	
+	
+}
+     d.close();
+      r3.close();
+       break;
+              
+                 }
+    case 'd':{
+ 	
+ 	while(r4.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+			flag=0;
+	cout<<"patient found "<<endl<<endl;
+		cout<<" Enter Details :- "<<endl;
+		v.visitorDetail(n,addr,dep);
+		d.write((char*)&v,sizeof(v));
+		
+	}	
+	
+}
+     d.close();
+      r4.close();
+       break;
+               
+                
+                  }  
+   
+   
+   
+
+}
+if(flag)
+{
+	cout<<"No patient Found"<<endl;
+	cout<<endl<<endl;
+	
+}
+ 				
+	
+}
+
+
+void searchCPatient()
+{
+	
+   int flag=1;
+ 	string n;
+string addr;
+string dep;
+ criticallyILLPatient p;
+ visitor v;
+ char choose;
+  cout<<"Name of patient:";
+  cin>>n;
+  cout<<"Department of patient:";
+  cin>>dep;
+  cout<<"Address of patient:";
+  cin>>addr;
+  
+
+ofstream d("visitor.dat",ios::binary|ios::app);
+  
+  
+ifstream r1("Callergist.dat",ios::binary|ios::in);
+
+   ifstream r2("Cdentist.dat",ios::binary|ios::in);
+
+ifstream r3("Cdermatologist.dat",ios::binary|ios::in);
+
+ifstream r4("Cphysiotherapy.dat",ios::binary|ios::in);
+
+if(dep=="allergist")
+{
+choose='a';		
+}
+
+else if(dep=="dentist")
+{
+choose='b';		
+}
+
+else if(dep=="dermatologist")
+{
+choose='c';		
+}
+
+else if(dep=="physiotherapy")
+{
+choose='d';		
+}
+else
+{
+	choose='f';
+cout<<"Department Not Found!!!!"<<endl;
+ cout<<endl<<endl;
+
+}
+
+switch(choose)
+{
+case 'a':{
+while(r1.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+		flag=0;
+		cout<<"patient found "<<endl<<endl;
+		cout<<" Enter Details :- "<<endl;
+		v.visitorDetail(n,addr,dep);
+		d.write((char*)&v,sizeof(v));
+		
+	}
+
+	
+}
+     d.close();
+      r1.close();
+       break;
+             }
+       
+ case 'b':{
+ 	
+ 	while(r2.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+			flag=0;
+		cout<<"patient found "<<endl<<endl;
+		cout<<" Enter Details :- "<<endl;
+		v.visitorDetail(n,addr,dep);
+		d.write((char*)&v,sizeof(v));
+		
+	}
+		
+	
+}
+     d.close();
+      r2.close();
+       break;
+               
+                
+                  }
+                  
+case 'c':{
+	           
+ 	
+ 	while(r3.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+			flag=0;
+	cout<<"patient found "<<endl<<endl;
+		cout<<" Enter Details :- "<<endl;
+		v.visitorDetail(n,addr,dep);
+		d.write((char*)&v,sizeof(v));
+		
+	}
+	
+	
+}
+     d.close();
+      r3.close();
+       break;
+              
+                 }
+    case 'd':{
+ 	
+ 	while(r4.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+			flag=0;
+	cout<<"Patient Found "<<endl<<endl;
+		cout<<" Enter Details :- "<<endl;
+		v.visitorDetail(n,addr,dep);
+		d.write((char*)&v,sizeof(v));
+		
+	}	
+	
+}
+     d.close();
+      r4.close();
+       break;
+               
+                
+                  }  
+   
+ 
+   
+
+}
+
+if(flag)
+{
+	cout<<"No Patient Found!!!"<<endl;
+		cout<<endl<<endl;
+	
+}
+ 		 				
+	
+}
+
+
+void admitPatient()
+{  
+ char choose;
+ patient t;
+	patient p;
+
+ofstream w1("allergist.dat",ios::binary|ios::app);
+ofstream w2("dentist.dat",ios::binary|ios::app);
+ofstream w3("dermatologist.dat",ios::binary|ios::app);
+ofstream w4("physiotherapy.dat",ios::binary|ios::app);
+
+
+ifstream r1("allergist.dat",ios::binary|ios::in);
+ ifstream r2("dentist.dat",ios::binary|ios::in);
+ifstream r3("dermatologist.dat",ios::binary|ios::in);
+ifstream r4("physiotherapy.dat",ios::binary|ios::in);
+
+ofstream w5("allpatients.dat",ios::binary|ios::app);
+do
+{
+	p.patientDetails();
+ cout<<"Do you want to get admitted(y/n):";
+ cin>>choose;
+ if(choose=='y')
+ {
+ 	cout<<endl<<"Your admission depends on doctors prescription "<<endl;
+ 	p.admitted();
+ }
+	
+	
+if(p.getDep()=="allergist")
+{
+	choose='a';
+}
+else if(p.getDep()=="dentist")
+{
+	choose='b';
+}
+else if(p.getDep()=="dermatologist")
+{
+	choose='c';
+}
+else if(p.getDep()=="physiotherapy")
+{
+	choose='d';
+}
+else
+{
+	choose='f';
+	system("cls");
+	cout<<"No Department Found!!!!!"<<endl<<endl;
+	
+}
+}
+while(choose=='f');
+
+switch(choose)
+{
+	case 'a':
+	if(w1.tellp()!=0)
+	{
+	r1.seekg(-1*sizeof(p),ios::end);
+	r1.read((char*)&t,sizeof(t));
+    
+    t.time.setTime(t.time.gethr(),t.time.getmin()+5,t.time.getsec());
+    	
+     p.time=t.time;
+     
+    r1.seekg(ios::beg);
+	}
+	cout<<"Arrive at ";
+	p.time.showTime();
+	r1.close();
+	cout<<endl;
+	
+	
+	w1.write((char*)&p,sizeof(p));
+	w5.write((char*)&p,sizeof(p));
+
+	
+	w5.close();
+    w1.close();
+    break;
+    case 'b':
+    
+    	if(w2.tellp()!=0)
+	{
+	r2.seekg(-1*sizeof(p),ios::end);
+	r2.read((char*)&t,sizeof(t));
+    
+    t.time.setTime(t.time.gethr(),t.time.getmin()+5,t.time.getsec());	
+    
+    p.time=t.time;
+    
+    r2.seekg(ios::beg);
+	}
+	cout<<"Arrive at ";
+	p.time.showTime();
+	r2.close();
+	cout<<endl;
+    
+    
+    
+	w2.write((char*)&p,sizeof(p));
+	w5.write((char*)&p,sizeof(p));
+	w5.close();
+    w2.close();
+    break;
+    case 'c':
+    
+    
+       	if(w3.tellp()!=0)
+	{
+	r3.seekg(-1*sizeof(p),ios::end);
+	r3.read((char*)&t,sizeof(t));
+    
+    t.time.setTime(t.time.gethr(),t.time.getmin()+5,t.time.getsec());	
+    
+     p.time=t.time;
+     
+    r3.seekg(ios::beg);
+	}
+	cout<<"Arrive at ";
+	p.time.showTime();
+	r3.close();
+	cout<<endl;
+    
+    
+    
+	w3.write((char*)&p,sizeof(p));
+	w5.write((char*)&p,sizeof(p));
+	w5.close();
+    w3.close();
+    break;
+    case 'd':
+    
+    
+       	if(w4.tellp()!=0)
+	{
+	r4.seekg(-1*sizeof(p),ios::end);
+	r4.read((char*)&t,sizeof(t));
+    
+    t.time.setTime(t.time.gethr(),t.time.getmin()+5,t.time.getsec());
+    
+     p.time=t.time;
+    
+    r4.seekg(ios::beg);
+	}
+	cout<<"Arrive at ";
+	p.time.showTime();
+	r4.close();
+	cout<<endl;
+    
+    
+	w4.write((char*)&p,sizeof(p));
+	w5.write((char*)&p,sizeof(p));
+	w5.close();
+    w4.close();
+    break;
+	
+	
+}
+
+
+	
+}
+void admitCPatient()
+{
+	criticallyILLPatient p;
+	
+   char choose;	
+  ofstream w1("Callergist.dat",ios::binary|ios::app);
+ofstream w2("Cdentist.dat",ios::binary|ios::app);
+ofstream w3("Cdermatologist.dat",ios::binary|ios::app);
+ofstream w4("Cphysiotherapy.dat",ios::binary|ios::app);
+ofstream w5("Callpatients.dat",ios::binary|ios::app);
+
+do
+{
+	p.CPatientDetails();
+	
+if(p.getDep()=="allergist")
+{
+	choose='a';
+}
+else if(p.getDep()=="dentist")
+{
+	choose='b';
+}
+else if(p.getDep()=="dermatologist")
+{
+	choose='c';
+}
+else if(p.getDep()=="physiotherapy")
+{
+	choose='d';
+}
+else
+{
+	choose='f';
+	system("cls");
+cout<<"No Department Found!!!!!!"<<endl;
+	cout<<endl;
+}
+}
+while(choose=='f');
+switch(choose)
+{
+	case 'a':
+	w1.write((char*)&p,sizeof(p));
+	w5.write((char*)&p,sizeof(p));
+	w5.close();
+    w1.close();
+    break;
+    case 'b':
+	w2.write((char*)&p,sizeof(p));
+	w5.write((char*)&p,sizeof(p));
+	w5.close();
+    w2.close();
+    break;
+    case 'c':
+	w3.write((char*)&p,sizeof(p));
+	w5.write((char*)&p,sizeof(p));
+	w5.close();
+    w3.close();
+    break;
+    case 'd':
+	w4.write((char*)&p,sizeof(p));
+	w5.write((char*)&p,sizeof(p));
+	w5.close();
+    w4.close();
+    break;
+	
+	
+}	
+	
+}
+void dischargePatient()
+{ 
+
+string n;
+string addr;
+string dep;
+ patient p;
+ int flag=1;
+ char choose;
+
+  
+ ofstream w("temp.dat",ios::binary|ios::app);
+
+ofstream d("discharged.dat",ios::binary|ios::app);
+  
+  
+ifstream r1("allergist.dat",ios::binary|ios::in);
+
+   ifstream r2("dentist.dat",ios::binary|ios::in);
+
+ifstream r3("dermatologist.dat",ios::binary|ios::in);
+
+ifstream r4("physiotherapy.dat",ios::binary|ios::in);
+
+ifstream r5("allpatients.dat",ios::binary|ios::in);
+
+	
+	cout<<"Name of patient:";
+  cin>>n;
+  cout<<"Department of patient:";
+  cin>>dep;
+  cout<<"Address of patient:";
+  cin>>addr;
+	
+	
+while(r5.read((char*)&p,sizeof(p)))
+{
+if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+{
+	
+	p.discharge();
+}
+w.write((char*)&p,sizeof(p));
+	
+}
+w.close();
+r5.close();
+remove("allpatients.dat");
+rename("temp.dat","allpatients.dat");
+
+if(dep=="allergist")
+{
+choose='a';		
+}
+
+else if(dep=="dentist")
+{
+choose='b';		
+}
+
+else if(dep=="dermatologist")
+{
+choose='c';		
+}
+
+else if(dep=="physiotherapy")
+{
+choose='d';		
+}
+else
+{
+	choose='f';
+	system("cls");
+	cout<<"No Department Found!!!!!"<<endl<<endl;
+	
+}
+
+
+switch(choose)
+{
+case 'a':{
+while(r1.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+		flag=0;
+		p.discharge();
+		d.write((char*)&p,sizeof(p));
+		
+	}
+	else{
+	w.write((char*)&p,sizeof(p));
+	
+	}	
+	
+}
+     d.close();
+     w.close();
+      r1.close();
+      remove("allergist.dat");
+      rename("temp.dat","allergist.dat");
+       break;
+             }
+       
+ case 'b':{
+ 	
+ 	while(r2.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+		flag=0;
+		p.discharge();
+		d.write((char*)&p,sizeof(p));
+		
+	}
+	else{
+	w.write((char*)&p,sizeof(p));
+	
+	}	
+	
+}
+     d.close();
+     w.close();
+      r2.close();
+      remove("dentist.dat");
+      rename("temp.dat","dentist.dat");
+       break;
+               
+                
+                  }
+                  
+case 'c':{
+	           
+ 	
+ 	while(r3.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+		flag=0;
+		p.discharge();
+		d.write((char*)&p,sizeof(p));
+		
+	}
+	else{
+	w.write((char*)&p,sizeof(p));
+	
+	}	
+	
+}
+     d.close();
+     w.close();
+      r3.close();
+    remove("dermatologist.dat");
+    rename("temp.dat","dermatologist.dat");
+       break;
+              
+                 }
+    case 'd':{
+ 	
+ 	while(r4.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+		flag=0;
+		p.discharge();
+		d.write((char*)&p,sizeof(p));
+		
+	}
+	else{
+	w.write((char*)&p,sizeof(p));
+	
+	}	
+	
+}
+     d.close();
+     w.close();
+      r4.close();
+      remove("physiotherapy.dat");
+    rename("temp.dat","physiotherapy.dat");
+       break;
+               
+                
+                  }  
+   
+   
+   
+
+}
+if(flag)
+{
+	system("cls");
+	cout<<"No Patient Found!!!!!"<<endl;
+	cout<<endl<<endl;
+}
+else
+{
+	cout<<"Patient is Discharged"<<endl;
+}
+
+
+
+}
+void dischargeCPatient()
+{
+criticallyILLPatient p;
+string n;
+string addr;
+string dep;
+ char choose;
+ int flag=1;
+  ofstream w("temp.dat",ios::binary|ios::app);
+
+ofstream d("Cdischarged.dat",ios::binary|ios::app);
+  
+  
+ifstream r1("Callergist.dat",ios::binary|ios::in);
+
+   ifstream r2("Cdentist.dat",ios::binary|ios::in);
+
+ifstream r3("Cdermatologist.dat",ios::binary|ios::in);
+
+ifstream r4("Cphysiotherapy.dat",ios::binary|ios::in);
+
+
+ifstream r5("Callpatients.dat",ios::binary|ios::in);
+
+  cout<<"Name of patient:";
+  cin>>n;
+  cout<<"Department of patient:";
+  cin>>dep;
+  cout<<"Address of patient:";
+  cin>>addr;
+  
+
+while(r5.read((char*)&p,sizeof(p)))
+{
+if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+{
+	
+	p.discharge();
+}
+w.write((char*)&p,sizeof(p));
+	
+}
+w.close();
+r5.close();
+remove("Callpatients.dat");
+rename("temp.dat","Callpatients.dat");
+
+if(dep=="allergist")
+{
+choose='a';		
+}
+
+else if(dep=="dentist")
+{
+choose='b';		
+}
+
+else if(dep=="dermatologist")
+{
+choose='c';		
+}
+
+else if(dep=="physiotherapy")
+{
+choose='d';		
+}
+else
+{
+	choose='f';
+	system("cls");
+	cout<<"No Department Found!!!"<<endl;
+	cout<<endl<<endl;
+
+	
+}
+
+
+
+switch(choose)
+{
+case 'a':{
+while(r1.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{  
+	   flag=0;
+		p.discharge();
+		d.write((char*)&p,sizeof(p));
+		
+	} 
+	else{
+	w.write((char*)&p,sizeof(p));
+	
+	}	
+	
+}
+     d.close();
+     w.close();
+      r1.close();
+      remove("Callergist.dat");
+      rename("temp.dat","Callergist.dat");
+       break;
+             }
+       
+ case 'b':{
+ 	
+ 	while(r2.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+		flag=0;
+		p.discharge();
+		d.write((char*)&p,sizeof(p));
+		
+	}
+	else{
+	w.write((char*)&p,sizeof(p));
+	
+	}	
+	
+}
+     d.close();
+     w.close();
+      r2.close();
+      remove("Cdentist.dat");
+      rename("temp.dat","Cdentist.dat");
+       break;
+               
+                
+                  }
+                  
+case 'c':{
+	           
+ 	
+ 	while(r3.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+		flag=0;
+		p.discharge();
+		d.write((char*)&p,sizeof(p));
+		
+	}
+	else{
+	w.write((char*)&p,sizeof(p));
+	
+	}	
+	
+}
+     d.close();
+     w.close();
+      r3.close();
+    remove("Cdermatologist.dat");
+  rename("temp.dat","Cdermatologist.dat");
+       break;
+              
+                 }
+    case 'd':{
+ 	
+ 	while(r4.read((char*)&p,sizeof(p)))
+{
+	if(n==p.getName()&&addr==p.getAddr()&&dep==p.getDep()&&p.getStatus()=="admitted")
+	{
+		flag=0;
+		p.discharge();
+		d.write((char*)&p,sizeof(p));
+		
+	}
+	else{
+	w.write((char*)&p,sizeof(p));
+	
+	}	
+	
+}
+     d.close();
+     w.close();
+      r4.close();
+      remove("Cphysiotherapy.dat");
+  rename("temp.dat","Cphysiotherapy.dat");
+       break;
+               
+                
+                  }  
+   
+}
+
+if(flag)
+{
+	system("cls");
+	cout<<"No Patient Found!!!!!"<<endl;
+	cout<<endl<<endl;
+}
+else
+{
+cout<<"Patient is Discharged"<<endl;
+cout<<endl;	
+	
+}
+
+//}while(flag);
+     	
+}
+
+void showAllergist()
+{
+patient p;
+  ifstream r("allergist.dat",ios::binary|ios::in);	
+  
+   ofstream w("allergist.dat",ios::binary|ios::app);
+  
+     if(w.tellp()==0)
+ {
+ 	cout<<"Nothing To Show"<<endl;
+ 	r.close();
+ 	w.close();
+ 	return;
+ 	
+ }
+	
+  while(r.read((char*)&p,sizeof(p)))
+  {
+   cout<<"Name:"<<p.getName()<<endl;
+   cout<<"Age:"<<p.getAge()<<endl;
+  cout<<"Gender:"<<p.getGender()<<endl;
+  cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+   cout<<"Department:"<<p.  getDep()<<endl;
+   cout<<"Address:"<<p.getAddr()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+   cout<<"Time of Arrival:";
+   p.time.showTime();
+   cout<<endl<<endl;
+  	
+  }
+  w.close();
+  r.close();
+	
+}
+
+
+void showDentist()
+{
+patient p;
+  ifstream r("dentist.dat",ios::binary|ios::in);	
+ ofstream w("dentist.dat",ios::binary|ios::app);
+ 
+ if(w.tellp()==0)
+ {
+ 	cout<<"Nothing To Show"<<endl;
+ 	r.close();
+ 	w.close();
+ 	return;
+ 	
+ }
+	
+  while(r.read((char*)&p,sizeof(p)))
+  {
+   cout<<"Name:"<<p.getName()<<endl;
+   cout<<"Age:"<<p.getAge()<<endl;
+  cout<<"Gender:"<<p.getGender()<<endl;
+  cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+   cout<<"Department:"<<p.  getDep()<<endl;
+   cout<<"Address:"<<p.getAddr()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+   cout<<"Time of Arrival:";
+   p.time.showTime();
+   cout<<endl<<endl;
+  	
+  }
+  r.close();
+  w.close();	
+}
+
+
+void showDermatologist()
+{
+patient p;
+  ifstream r("dermatologist.dat",ios::binary|ios::in);	
+  
+    ofstream w("dermatologist.dat",ios::binary|ios::app);
+  
+   if(w.tellp()==0)
+ {
+ 	cout<<"Nothing To Show"<<endl;
+ 	r.close();
+ 	w.close();
+ 	return;
+ 	
+ }
+	
+  while(r.read((char*)&p,sizeof(p)))
+  {
+   cout<<"Name:"<<p.getName()<<endl;
+   cout<<"Age:"<<p.getAge()<<endl;
+  cout<<"Gender:"<<p.getGender()<<endl;
+  cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+   cout<<"Department:"<<p.  getDep()<<endl;
+   cout<<"Address:"<<p.getAddr()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+   cout<<"Time of Arrival:";
+   p.time.showTime();
+   cout<<endl<<endl;
+  	
+  }
+  w.close();
+  r.close();
+	
+}
+
+void showPhysiotherapy()
+{
+patient p;
+  ifstream r("physiotherapy.dat",ios::binary|ios::in);	
+
+  ofstream w("physiotherapy.dat",ios::binary|ios::app);
+  
+     if(w.tellp()==0)
+ {
+ 	cout<<"Nothing To Show"<<endl;
+ 	r.close();
+ 	w.close();
+ 	return;
+ 	
+ }
+			
+  while(r.read((char*)&p,sizeof(p)))
+  {
+   cout<<"Name:"<<p.getName()<<endl;
+   cout<<"Age:"<<p.getAge()<<endl;
+  cout<<"Gender:"<<p.getGender()<<endl;
+  cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+   cout<<"Department:"<<p.  getDep()<<endl;
+   cout<<"Address:"<<p.getAddr()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+   cout<<"Time of Arrival:";
+   p.time.showTime();
+   cout<<endl<<endl;
+  	
+  }
+  w.close();
+  r.close();
+	
+}
+
+
+void showCAllergist()
+{
+criticallyILLPatient p;
+  ifstream r("Callergist.dat",ios::binary|ios::in);	
+  
+   ofstream w("Callergist.dat",ios::binary|ios::app);	
+   
+    
+  if(w.tellp()==0)
+ {
+ 	cout<<"Nothing To Show"<<endl;
+ 	r.close();
+ 	w.close();
+ 	return;
+ 	
+ }
+    
+	
+  while(r.read((char*)&p,sizeof(p)))
+  {
+   cout<<"Name:"<<p.getName()<<endl;
+   cout<<"Age:"<<p.getAge()<<endl;
+  cout<<"Gender:"<<p.getGender()<<endl;
+  cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+   cout<<"Department:"<<p.  getDep()<<endl;
+   cout<<"Address:"<<p.getAddr()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+   cout<<endl<<endl;
+  
+  }
+  w.close();
+  r.close();
+	
+}
+
+
+
+
+void showCDentist()
+{
+criticallyILLPatient p;
+  ifstream r("Cdentist.dat",ios::binary|ios::in);	
+  
+    ofstream w("Cdentist.dat",ios::binary|ios::app);
+     if(w.tellp()==0)
+ {
+ 	cout<<"Nothing To Show"<<endl;
+ 	r.close();
+ 	w.close();
+ 	return;
+ 	
+ }
+	
+  while(r.read((char*)&p,sizeof(p)))
+  {
+   cout<<"Name:"<<p.getName()<<endl;
+   cout<<"Age:"<<p.getAge()<<endl;
+  cout<<"Gender:"<<p.getGender()<<endl;
+  cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+   cout<<"Department:"<<p.  getDep()<<endl;
+   cout<<"Address:"<<p.getAddr()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+ cout<<endl<<endl;
+  	
+  }
+  w.close();
+  r.close();
+	
+}
+
+
+
+
+void showCDermatologist()
+{
+criticallyILLPatient p;
+  ifstream r("Cdermatologist.dat",ios::binary|ios::in);	
+  
+   ofstream w("Cdermatologist.dat",ios::binary|ios::app);
+  
+       if(w.tellp()==0)
+ {
+ 	cout<<"Nothing To Show"<<endl;
+ 	r.close();
+ 	w.close();
+ 	return;
+ 	
+ }
+	
+  while(r.read((char*)&p,sizeof(p)))
+  {
+   cout<<"Name:"<<p.getName()<<endl;
+   cout<<"Age:"<<p.getAge()<<endl;
+  cout<<"Gender:"<<p.getGender()<<endl;
+  cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+   cout<<"Department:"<<p.  getDep()<<endl;
+   cout<<"Address:"<<p.getAddr()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+  
+  	 cout<<endl<<endl;	
+  }
+  w.close();
+  r.close();
+	
+}
+
+
+
+void showCPhysiotherapy()
+{
+criticallyILLPatient p;
+  ifstream r("Cphysiotherapy.dat",ios::binary|ios::in);	
+	
+	ofstream w("Cphysiotherapy.dat",ios::binary|ios::app);
+	
+ if(w.tellp()==0)
+ {
+ 	cout<<"Nothing To Show"<<endl;
+ 	r.close();
+ 	w.close();
+ 	return;
+ 	
+ }
+	
+	
+  while(r.read((char*)&p,sizeof(p)))
+  {
+   cout<<"Name:"<<p.getName()<<endl;
+   cout<<"Age:"<<p.getAge()<<endl;
+  cout<<"Gender:"<<p.getGender()<<endl;
+  cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+   cout<<"Department:"<<p.  getDep()<<endl;
+   cout<<"Address:"<<p.getAddr()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+
+  	 cout<<endl<<endl;
+  }
+  w.close();
+  r.close();
+	
+}
+
+
+void showDischarged()
+{
+	
+	patient p;
+  ifstream r("discharged.dat",ios::binary|ios::in);
+  
+ ofstream w("discharged.dat",ios::binary|ios::app);	
+  
+   if(w.tellp()==0)
+ {
+ 	cout<<"Nothing To Show"<<endl;
+ 	r.close();
+ 	w.close();
+ 	return;
+ 	
+ }
+	
+  while(r.read((char*)&p,sizeof(p)))
+  {
+   cout<<"Name:"<<p.getName()<<endl;
+   cout<<"Age:"<<p.getAge()<<endl;
+  cout<<"Gender:"<<p.getGender()<<endl;
+  cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+   cout<<"Department:"<<p.  getDep()<<endl;
+   cout<<"Address:"<<p.getAddr()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+   cout<<"Time of Arrival:";
+   p.time.showTime();
+   cout<<endl<<endl;
+  	
+  }
+  w.close();
+  r.close();
+	
+	
+}
+
+
+
+void showCDischarged()
+{
+	
+	criticallyILLPatient p;
+  ifstream r("Cdischarged.dat",ios::binary|ios::in);
+  
+ ofstream w("Cdischarged.dat",ios::binary|ios::app); 		
+  
+     if(w.tellp()==0)
+ {
+ 	cout<<"Nothing To Show"<<endl;
+ 	r.close();
+ 	w.close();
+ 	return;
+ 	
+ }
+  
+	
+  while(r.read((char*)&p,sizeof(p)))
+  {
+   cout<<"Name:"<<p.getName()<<endl;
+   cout<<"Age:"<<p.getAge()<<endl;
+  cout<<"Gender:"<<p.getGender()<<endl;
+  cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+   cout<<"Department:"<<p.  getDep()<<endl;
+   cout<<"Address:"<<p.getAddr()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+  	 cout<<endl<<endl;
+  }
+  w.close();
+  r.close();
+	
+	
+}
+
+
+
+void showVisitor()
+{
+	visitor v;
+ifstream r("visitor.dat",ios::binary|ios::in);
+
+ofstream w("visitor.dat",ios::binary|ios::app);
+
+ if(w.tellp()==0)
+ {
+ 	cout<<"Nothing To Show"<<endl;
+ 	r.close();
+ 	w.close();
+ 	return;
+ 	
+ }
+
+
+
+ while(r.read((char*)&v,sizeof(v)))
+ {
+  cout<<"Visitor Name:";
+  cout<<v.getName()<<endl;
+  cout<<"Age:";
+  cout<<v.getAge()<<endl;
+   cout<<"Visitor phone no.:";
+ cout<<v.getPhoneNo()<<endl;
+ 	cout<<"Visitor Address:";
+ 	cout<<v.getAddr()<<endl;
+ 	cout<<"Patient To Meet:";
+ 	cout<<v.getPatientToMeet()<<endl;
+     cout<<endl<<endl;
+ 	
+ 	
+ }
+ w.close();
+ r.close();
+	
+	
+}
+
+void searchPatientByName()
+{   ifstream r("allpatients.dat",ios::binary|ios::in);
+	patient p;
+	string n;
+	int flag=1;	
+	
+	cout<<"Enter name of patient:";
+	cin>>n;
+	while(r.read((char*)&p,sizeof(p)))
+	{
+	if(p.getName()==n)
+		{
+			flag=0;
+		   cout<<endl<<endl<<"patient Details:-"<<endl;
+		  cout<<"Name:"<<p.getName()<<endl;
+		   cout<<"Age:"<<p.getAge()<<endl;
+	cout<<"Address:"<<p.getAddr()<<endl;
+	cout<<"Blood group:"<<p.getBloodGroup()<<endl;
+ cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+cout<<"Department:"<<p.getDep()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+cout<<"Time of arrival:";
+		   p.time.showTime();
+		   cout<<endl<<endl;
+	       break;
+		}
+	}
+	r.close();
+	
+	if(flag)
+	{
+	cout<<"No Such Patient Found"<<endl;
+		
+	}
+	
+	
+}
+
+
+void searchCPatientByName()
+{   ifstream r("Callpatients.dat",ios::binary|ios::in);
+	criticallyILLPatient p;
+	string n;
+	int flag=1;
+	
+	cout<<"Enter name of patient:";
+	cin>>n;
+	while(r.read((char*)&p,sizeof(p)))
+	{
+	if(p.getName()==n)
+		{  flag=0;
+		   cout<<endl<<endl<<"patient Details:-"<<endl;
+		  cout<<"Name:"<<p.getName()<<endl;
+		   cout<<"Age:"<<p.getAge()<<endl;
+	cout<<"Address:"<<p.getAddr()<<endl;
+	cout<<"Blood group:"<<p.getBloodGroup()<<endl;
+ cout<<"Phone No.:"<<p.getPhoneNo()<<endl;
+cout<<"Department:"<<p.getDep()<<endl;
+cout<<"Status:"<<p.getStatus()<<endl;
+		
+		}
+	}
+	r.close();
+	
+if(flag)
+{
+	cout<<"No Such Patient Found"<<endl;
+}
+}
+
+void generateReport()
+{
+   string n;
+    string dep;
+    string addr;
+    patient p;
+    int flag=1;
+    cout<<"Patient name:";
+    cin>>n;
+    cout<<"Department of patient:";
+    cin>>dep;
+    cout<<"Enter address:";
+    cin>>addr;
+    ofstream w("temp.dat",ios::binary);
+   ifstream r("allpatients.dat",ios::binary|ios::in);
+   while(r.read((char*)&p,sizeof(p)))
+   {
+   	if(n==p.getName()&&dep==p.getDep()&&addr==p.getAddr())
+   	{
+   		flag=0;
+   		p.writeReport();
+   
+   	}
+   	w.write((char*)&p,sizeof(p));
+   	
+   }
+   w.close();
+   r.close();
+   remove("allpatients.dat");
+   rename("temp.dat","allpatients.dat");
+   if(flag)
+   {
+   cout<<"No patient Found"<<endl;	
+   	
+   }
+}
+
+
+
+void generateCReport()
+{
+   string n;
+    string dep;
+    string addr;
+    criticallyILLPatient p;
+    int flag=1;
+    cout<<"Patient name:";
+    cin>>n;
+    cout<<"Department of patient:";
+    cin>>dep;
+    cout<<"Enter address:";
+    cin>>addr;
+    ofstream w("temp.dat",ios::binary);
+   ifstream r("Callpatients.dat",ios::binary|ios::in);
+   while(r.read((char*)&p,sizeof(p)))
+   {
+   	if(n==p.getName()&&dep==p.getDep()&&addr==p.getAddr())
+   	{
+   		flag=0;
+   		p.writeReport();
+   		
+   	}
+   	w.write((char*)&p,sizeof(p));
+   	
+   }
+   w.close();
+   r.close();
+   remove("Callpatients.dat");
+   rename("temp.dat","Callpatients.dat");
+   if(flag)
+   {
+   	cout<<"No Patient Found"<<endl;
+   }
+}
+
+void getReport()
+{
+	int flag=1;
+
+   string n;
+    string dep;
+    string addr;
+    patient p;
+  
+    cout<<"Patient name:";
+    cin>>n;
+    cout<<"Department of patient:";
+    cin>>dep;
+    cout<<"Enter address:";
+    cin>>addr;
+
+   ifstream r("allpatients.dat",ios::binary|ios::in);
+   while(r.read((char*)&p,sizeof(p)))
+   {
+   	if(n==p.getName()&&dep==p.getDep()&&addr==p.getAddr())
+   	{
+   		flag=0;
+   cout<<endl<<"Report Details:-"<<endl;
+   		cout<<p.getReportStatus()<<endl;
+   		cout<<endl;
+   	}
+   	
+   }
+   r.close();
+
+if(flag)   
+ {
+    cout<<"Patient Not Found!!!!!!!"<<endl;	
+ 	        
+  } 
+  
+   
+	
+}
+
+
+void getCReport()
+{
+	int flag=1;	
+	
+   string n;
+    string dep;
+    string addr;
+   criticallyILLPatient p;
+    cout<<"Patient name:";
+    cin>>n;
+    cout<<"Department of patient:";
+    cin>>dep;
+    cout<<"Enter address:";
+    cin>>addr;
+
+   ifstream r("Callpatients.dat",ios::binary|ios::in);
+   while(r.read((char*)&p,sizeof(p)))
+   {
+   	if(n==p.getName()&&dep==p.getDep()&&addr==p.getAddr())
+   	{ 
+   	flag=0;
+   cout<<endl<<"Report Details:-"<<endl;
+   		cout<<p.getReportStatus()<<endl;
+   		cout<<endl;
+   	}
+   	
+   }
+   r.close();
+
+if(flag)
+{
+	cout<<"Patient Not Found!!!!"<<endl;
+}
+
+	
+	
+}
+
+
+
+
+void deleteAllData()
+{
+	
+	  remove("allpatients.dat");
+     remove("Callpatients.dat");
+     remove("dermatologist.dat");
+     remove("Cdermatologist.dat");
+     remove("dentist.dat");
+      remove("Cdentist.dat");
+       remove("physiotherapy.dat");
+      remove("Cphysiotherapy.dat");
+       remove("allergist.dat");
+       remove("Callergist.dat");
+       remove("visitor.dat");
+       remove("Cdischarged.dat");
+       remove("discharged.dat");
+	
+	
+}
+
+class user
+{
+	
+	string name;
+	string pNo;
+	string ID;
+	string password;
+	int perm;
+	public:
+	user(){perm=0;}
+	void permit()
+	{
+		perm=1;
+	}
+	string getID()
+	{
+		return ID;
+	}
+	string getPassword()
+	{
+	   return password;	
+	}
+	string getName()
+	{
+		
+		return name;
+	}
+	string getPhoneNo()
+	{
+		return pNo;
+		
+	}
+	
+	void details()
+	{
+	cout<<"Enter name:";	
+	cin>>name;
+	cout<<"Enter Phone No. :";
+	cin>>pNo;
+	cout<<"User ID:";
+	cin>>ID;
+	cout<<"Password:";
+	cin>>password;
+																	
+		
+	}
+	
+};
+
+class admin
+{
+	
+
+	string name;
+	string pNo;
+	string ID;
+	string password;
+
+	public:
+	string getID()
+	{
+		return ID;
+	}
+	string getPassword()
+	{
+	   return password;	
+	}
+	string getName()
+	{
+		
+		return name;
+	}
+	string getPhoneNo()
+	{
+		return pNo;
+		
+	}
+	
+	void details()
+	{
+	cout<<"Enter name:";	
+	cin>>name;
+	cout<<"Enter Phone No. :";
+	cin>>pNo;
+	cout<<"User ID:";
+	cin>>ID;
+	cout<<"Password:";
+	cin>>password;
+																	
+		
+	}
+		
+				
+	
+};
+/*---------------/prototypes----------------- */
+void userSignIn();
+void userLogin();
+void forgotPassword();
+void userMode();
+void adminMode();
+
+void forgotPassword()
+{
+	string name;
+	string pNo;
+	string ID;
+	cout<<"Enter name:";
+	cin>>name;
+	cout<<"Phone No. :";
+	cin>>pNo;
+	cout<<"User ID:";
+	cin>>ID;
+	user u;
+	char choose;
+	static int flag;
+	flag=1;
+	ifstream r("user.dat",ios::binary|ios::in);
+
+    while(r.read((char*)&u,sizeof(u)))
+    {
+    	if(name==u.getName()&&pNo==u.getPhoneNo()&&ID==u.getID())
+    	{
+    cout<<"Your password is recoverde:"<<endl;
+    	cout<<u.getPassword();
+    	flag=0;	
+    	cout<<endl<<"Login Again:"<<endl;
+    	userLogin();
+    	break;
+    	}
+   }
+   if(flag)
+   {
+   	cout<<"No Account Found"<<endl;
+  cout<<"Create New Account(y/n):"<<endl;
+    cin>>choose;
+      if(choose=='y') 
+     {
+     	userSignIn();
+     }
+   	
+   }
+   r.close();
+
+		
+		
+	
+}
+
+void userSignIn()
+{
+
+
+  user u;
+
+ofstream w("user.dat",ios::binary|ios::app);
+
+	    u.details();
+	   w.write((char*)&u,sizeof(u));
+
+	w.close();
+	
+	
+}
+void userLogin()
+{
+	user u;
+	string ID;
+	string password;
+	cout<<"                           User Login";
+	cout<<endl<<"-->User ID:";
+	cin>>ID;
+	cout<<endl<<"-->Password:";
+	cin>>password;
+	cout<<endl;
+	char choose;
+  static int flag;
+  flag=1;
+	ifstream r("user.dat",ios::binary|ios::in);
+	
+	while(r.read((char*)&u,sizeof(u)))
+	{
+		
+		if(ID==u.getID()&&password==u.getPassword())
+		{
+			cout<<"*****************Successfully Logged In******************"<<endl<<endl<<endl;
+			cout<<"Hello "<<u.getName()<<endl<<endl;
+			u.permit();
+			flag=0;
+			userMode();
+			break;
+		}
+		
+	}
+	if(flag)
+	{
+	cout<<"No User found"<<endl<<endl;
+	cout<<"Forgot your Password(y/n):";
+	cin>>choose;
+	if(choose=='y')
+	{
+		forgotPassword();
+	}
+	}
+	
+	r.close();
+	
+}
+
+
+//To add admin account ,so that users cannot make admin account
+void temprary()
+{
+	int n;
+	admin p;
+ ofstream w("admin.dat",ios::binary|ios::app);
+ cout<<"Enter No. of admins to Add:";
+ cin>>n;
+for(int i=0;i<n;i++)
+{
+	p.details();
+	w.write((char*)&p,sizeof(p));
+	
+}
+w.close();
+	
+}
+
+
+
+
+
+void adminLogin()
+{  static int flag;
+     flag=1;
+	admin p;
+	string ID;
+	string password;
+	cout<<"User ID:";
+	cin>>ID;
+	cout<<"Password:";
+	cin>>password;
+	
+ifstream r("admin.dat",ios::binary|ios::in);
+
+while(r.read((char*)&p,sizeof(p)))
+{
+	if(ID==p.getID()&&password==p.getPassword())
+	{
+		cout<<"Succesfully logged in"<<endl;
+		flag=0;
+		adminMode();
+		break;
+	}
+	
+	
+}
+if(flag)
+{
+	char choose;
+	cout<<"Wrong password and ID"<<endl;
+	cout<<"Try again or otherwise take help from admin block"<<endl;
+	cout<<"Try to login(y/n):";
+	cin>>choose;
+	if(choose=='y')
+	{
+		
+		adminLogin();
+	}
+	
+	
+}
+r.close();
+	
+}
+
+
+
+
+void userMode()
+{
+    int choose;
+        
+
+    do{ 
+    
+    
+        cout<<"                    1.To Meet Doctor"<<endl<<endl;
+        cout<<"                    2.To Visit For Patient"<<endl<<endl;
+        cout<<"                    3.To Visit for Critical Patient"<<endl<<endl;
+        cout<<"                    4.To Get Report"<<endl<<endl;
+        cout<<"                    5.To Get Critical patient Report"<<endl<<endl;
+        cout<<"                    6.Return back"<<endl<<endl;
+        cout<<"                    7.Exit"<<endl<<endl;
+    
+    
+    
+      cout<<"                         select option:";
+      cin>>choose;
+      
+	switch(choose)
+	{	
+	case 1:admitPatient();
+	cout<<"Click Enter To Coninue";
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	
+	 break;
+	case 2:searchPatient();
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	
+	break;
+	case 3:searchCPatient();
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	
+	break;
+	case 4:getReport();
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+
+	break;
+	case 5:getCReport();
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	
+	break;	
+	case 6:system("cls");
+
+	return;
+	break;
+	case 7:exit(0);
+	default:system("cls");
+	cout<<"Invalid Input!!!!!!"<<endl;
+	
+	}
+    }while(choose!=7);
+}
+void adminMode()
+{
+	  int choose;
+
+	
+	do
+	{
+		
+			cout<<"                    Admin Login"<<endl<<endl;
+	 
+        
+        cout<<"            1.To Admit Critical Patient"<<endl<<endl;
+        cout<<"            2.Discharge Patient"<<endl<<endl;
+        cout<<"            3.Discharge Critical Patient"<<endl<<endl;
+        cout<<"            4.Show Allergist List"<<endl<<endl;
+        cout<<"            5.Show Dentist List"<<endl<<endl;
+        cout<<"            6.Show Dermatologist List"<<endl<<endl;
+        cout<<"            7.Show Physiotherapy List"<<endl<<endl;
+        cout<<"            8.Show Critical Allergist List"<<endl<<endl;
+        cout<<"            9.Show Critical Dentist List"<<endl<<endl;
+       cout<<"           10.Show Critical Dermatologist List"<<endl<<endl;
+       cout<<"           11.Show Critical Physiotherapy List"<<endl<<endl;
+  	 cout<<"           12.Search Patient"<<endl<<endl;
+	  
+	   cout<<"           13.Search Critical Patient"<<endl<<endl;
+	   
+	   cout<<"           14.Generate report "<<endl<<endl;
+	
+	   cout<<"           15.Generate Critical Patient report "<<endl<<endl;
+	
+	cout<<"           16.Show Visitors"<<endl<<endl;
+	
+	cout<<"           17.Delete All Data"<<endl<<endl;
+	
+	cout<<"           18.Show Discharged Patients"<<endl<<endl;
+	
+		cout<<"           19.Show Critically ILL Discharged Patients"<<endl<<endl;
+	
+	cout<<"           20.Back"<<endl<<endl;
+	
+	cout<<"           21.Exit"<<endl<<endl;
+		
+		
+		cout<<"                     select option:";
+		cin>>choose;
+	
+		switch(choose)
+		{
+	case 1:{admitCPatient();
+cout<<"Enter to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	
+	break;}
+	case 2:{dischargePatient();
+	cout<<"Enter to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;}
+	case 3:{dischargeCPatient();
+	cout<<"Enter to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;}
+	case 4:{showAllergist();
+	cout<<"Enter to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;}
+	case 5:{showDentist();
+	cout<<"Enter to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;}
+	case 6:{showDermatologist();
+	cout<<"Enter to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;}
+	case 7:{showPhysiotherapy();
+	cout<<"Enter  to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;}
+	case 8:{showCAllergist();
+	cout<<"Enter to continue"<<endl;
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;}
+	case 9:{showCDentist();
+	cout<<"Enter to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;}
+	case 10:showCDermatologist();
+	cout<<"Enter to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;
+	case 11:showCPhysiotherapy();
+	cout<<"Enter to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;
+	case 12:searchPatientByName();
+	cout<<"Enter  to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;
+	case 13:searchCPatientByName();
+	cout<<"Enter any key to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;
+	case 14:generateReport();
+	cout<<"Enter any key to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;
+	case 15:generateCReport();
+	cout<<"Enter any key to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;
+	case 16:showVisitor();
+	cout<<"Enter any key to continue"<<endl;
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;
+	case 17:deleteAllData();
+
+	cout<<"Succesfully Deleted"<<endl;
+	
+	cout<<"Enter to continue"<<endl;
+
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;
+	case 18:showDischarged();
+	cout<<"Enter to continue"<<endl;
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;
+	
+	
+	case 19:showCDischarged();
+	cout<<"Enter to continue"<<endl;
+	cin.ignore();
+	cin.ignore();
+	system("cls");
+	break;	
+	
+	
+	case 20:
+	system("cls");
+	system("cls");
+	return;
+	break;
+	case 21:exit(0);
+	break;
+	default :cout<<"Invalid Input!!!!!!!"<<endl;
+	
+		}
+	
+	}while(choose!=21);
+}
+
+void activities()
+{
+	admitPatient();
+	admitCPatient();
+	dischargePatient();
+	dischargeCPatient();
+	showAllergist();
+	showDentist();
+	showDermatologist();
+	showPhysiotherapy();
+	searchPatient();
+	showCAllergist();
+	showCDentist();
+	showCDermatologist();
+	showCPhysiotherapy();
+	searchCPatient();
+	searchPatientByName();
+	searchCPatientByName();
+	generateReport();
+	generateCReport();
+	getReport();
+	getCReport();
+	userLogin();
+	userSignIn();
+	userMode();
+	adminMode();
+	adminLogin();
+	forgotPassword();
+	showVisitor();
+	deleteAllData();
+	showCDischarged();
+	showDischarged();
+	
+}
+
+
+
+int main()
+{  
+  
+    int choose;
+   cout<<"                 welcome to DTU hospital"<<endl<<endl<<endl;
+   cout<<"                 Departments Available:- "<<endl<<endl;
+   
+   cout<<"                      1.allergist"<<endl<<endl;
+   cout<<"                      2.dentist"<<endl<<endl;
+   cout<<"                      3.dermatologist"<<endl<<endl;
+    cout<<"                     4.physiotherapy"<<endl<<endl;
+    
+    cout<<"   !!!!!!!!!!Please fill departments in lower case!!!!!!!"<<endl<<endl;
+         cout<<"                Click Enter to continue";
+    cin.ignore();
+    
+    system("cls");
+
+  
+   do
+   {
+   	    cout<<"--------------------------1.ADMIN---------------------------"<<endl<<endl;
+     cout<<"--------------------------2.USER SIGN IN--------------------"<<endl<<endl;
+     
+  cout<<"--------------------------3.USER LOG IN--------------------"<<endl<<endl;
+     
+      cout<<"--------------------------4.LOG OUT------------------------"<<endl<<endl;
+   	
+   	
+   	
+   	cout<<"                         Select Option:";
+   	cin>>choose;
+       switch(choose)
+   	{	
+   	case 1:system("cls");
+   	         adminLogin();
+   	         system("cls");
+   	             break;
+   	case 2:system("cls");
+   	         userSignIn();
+   	         system("cls");
+   	             break;
+   	 case 3:system("cls");
+   	            userLogin();
+   	            system("cls");
+   	             break;
+        case 4:exit(0);
+                    break;
+   default :system("cls");
+   cout<<"                       Invalid input!!!!!!!?"<<endl;
+   	
+   	}
+   }while(choose!=4);
+
+
+
+}
